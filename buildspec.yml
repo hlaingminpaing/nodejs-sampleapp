@@ -1,0 +1,29 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: latest
+    commands:
+      - echo Installing dependencies...
+      - npm install # Install dependencies if package.json exists
+
+  pre_build:
+    commands:
+      - echo Running pre-build checks...
+      - node -c server.js # Syntax check for server.js
+      - echo Pre-build checks completed.
+
+  build:
+    commands:
+      - echo Starting the Node.js application for testing...
+      - nohup node server.js & # Start the application in the background
+      - echo Waiting for the application to start...
+      - sleep 5 # Give the server time to start
+      - curl -I http://localhost:3000 # Test the application is running
+      - echo Application tested successfully.
+
+  post_build:
+    commands:
+      - echo Build and application testing completed!
+
