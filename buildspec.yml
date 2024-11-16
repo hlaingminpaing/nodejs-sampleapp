@@ -6,7 +6,7 @@ phases:
       nodejs: latest
     commands:
       - echo Installing dependencies...
-      - npm install # Install dependencies if package.json exists
+      # - npm install # Install dependencies if package.json exists
 
   pre_build:
     commands:
